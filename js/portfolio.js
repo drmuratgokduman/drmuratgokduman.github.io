@@ -5,7 +5,10 @@ async function renderPortfolio(container) {
   var posts = await store.getPosts();
   var projects = await store.getProjects();
   var stats = await store.getStats();
+  var settings = await store.getSettings();
   var initial = profile.name ? profile.name.charAt(0).toUpperCase() : '?';
+
+  var heroClass = settings.heroLayout === 'split' ? 'hero layout-split' : 'hero';
 
   container.innerHTML =
     '<nav class="nav" id="main-nav"><div class="nav-inner">' +
@@ -21,18 +24,20 @@ async function renderPortfolio(container) {
       '<button class="nav-toggle" id="nav-toggle">☰</button>' +
     '</div></nav>' +
 
-    '<section class="hero" id="hero">' +
+    '<section class="'+heroClass+'" id="hero">' +
       '<div class="hero-bg"></div><div class="hero-orb hero-orb-1"></div><div class="hero-orb hero-orb-2"></div>' +
       '<div class="hero-content">' +
         '<div class="hero-photo">' +
           (profile.photo ? '<img src="'+profile.photo+'" alt="'+escapeHtml(profile.name)+'">' : '<div class="hero-photo-placeholder">'+initial+'</div>') +
         '</div>' +
-        '<h1 class="hero-name">' + escapeHtml(profile.name) + '</h1>' +
-        '<p class="hero-title">&lt; ' + escapeHtml(profile.title) + ' /&gt;</p>' +
-        '<p class="hero-bio">' + escapeHtml(profile.bio) + '</p>' +
-        '<div class="hero-actions">' +
-          '<a href="#projects" class="btn btn-primary btn-lg" data-scroll="projects">Projelerimi Gör</a>' +
-          '<a href="#contact" class="btn btn-secondary btn-lg" data-scroll="contact">İletişime Geç</a>' +
+        '<div class="hero-text-group">' +
+          '<h1 class="hero-name">' + escapeHtml(profile.name) + '</h1>' +
+          '<p class="hero-title">&lt; ' + escapeHtml(profile.title) + ' /&gt;</p>' +
+          '<p class="hero-bio">' + escapeHtml(profile.bio) + '</p>' +
+          '<div class="hero-actions">' +
+            '<a href="#projects" class="btn btn-primary btn-lg" data-scroll="projects">Projelerimi Gör</a>' +
+            '<a href="#contact" class="btn btn-secondary btn-lg" data-scroll="contact">İletişime Geç</a>' +
+          '</div>' +
         '</div>' +
       '</div>' +
       '<div class="hero-scroll"><span>Aşağı Kaydır</span><div class="hero-scroll-line"></div></div>' +

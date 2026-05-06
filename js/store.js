@@ -31,7 +31,7 @@ var DEFAULT_DATA = {
   projects: [
     { id: 'proj-1', title: 'VR Deneyimi', description: 'Örnek 3D proje.', technologies: ['Unity', 'C#'], liveUrl: '', githubUrl: '', images: [], date: '2026-05-01' }
   ],
-  settings: { siteTitle: 'Portfolyom' }
+  settings: { siteTitle: 'Portfolyom', heroLayout: 'centered' }
 };
 
 var store = {
@@ -120,11 +120,12 @@ var store = {
   },
 
   getSettings: async function() {
-    if(!isFirebaseEnabled) return Object.assign({}, this._mem.settings);
+    var def = Object.assign({}, this._mem.settings);
+    if(!isFirebaseEnabled) return def;
     try {
       var doc = await db.collection('portfolio').doc('settings').get();
-      return doc.exists ? doc.data() : this._mem.settings;
-    } catch(e) { console.error("Firebase Hatası:", e); return this._mem.settings; }
+      return doc.exists ? Object.assign(def, doc.data()) : def;
+    } catch(e) { console.error("Firebase Hatası:", e); return def; }
   },
   updateSettings: async function(u) {
     if(!isFirebaseEnabled) { Object.assign(this._mem.settings, u); return; }

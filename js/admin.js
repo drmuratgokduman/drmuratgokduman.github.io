@@ -258,21 +258,27 @@ async function renderSettingsPage(el) {
   el.innerHTML =
     '<div class="editor-form page-enter"><form id="settings-form">' +
       '<div class="form-group"><label class="form-label">Site Başlığı</label><input class="form-input" id="st-title" value="'+escapeHtml(settings.siteTitle)+'"></div>' +
-      '<div class="form-group"><label class="form-label">Admin Şifresi</label><input class="form-input" type="password" id="st-password" placeholder="Yeni şifre (boş bırakırsanız değişmez)"></div>' +
-      '<button type="submit" class="btn btn-primary btn-lg">💾 Kaydet</button>' +
-    '</form>' +
-    '<div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)"><h3 style="margin-bottom:1rem;color:var(--danger)">Tehlikeli Bölge</h3><button class="btn btn-danger" id="reset-btn">🗑️ Tüm Verileri Sıfırla</button></div></div>';
+      '<div class="form-group">' +
+        '<label class="form-label">Ana Ekran (Hero) Tasarımı</label>' +
+        '<select class="form-input" id="st-layout" style="cursor:pointer">' +
+          '<option value="centered" '+(settings.heroLayout!=='split'?'selected':'')+'>Ortalanmış Tasarım (Standart)</option>' +
+          '<option value="split" '+(settings.heroLayout==='split'?'selected':'')+'>İkiye Bölünmüş (Sol Fotoğraf, Sağ Metin)</option>' +
+        '</select>' +
+      '</div>' +
+      '<button type="submit" class="btn btn-primary btn-lg" id="save-settings-btn">💾 Kaydet</button>' +
+    '</form></div>';
 
-  document.getElementById('settings-form').addEventListener('submit',function(e){
+  document.getElementById('settings-form').addEventListener('submit', async function(e){
     e.preventDefault();
-    var updates={siteTitle:document.getElementById('st-title').value};
-    var pw=document.getElementById('st-password').value;
-    if(pw) updates.adminPassword=pw;
-    store.updateSettings(updates);
-    if(updates.siteTitle) document.title = updates.siteTitle;
-    showToast('Ayarlar kaydedildi!');
-  });
-  document.getElementById('reset-btn').addEventListener('click',function(){
-    showConfirm('Verileri Sıfırla','Tüm veriler silinip varsayılan duruma dönecek. Emin misiniz?').then(function(ok){if(ok){store.resetAll();showToast('Veriler sıfırlandı');navigate('/admin/dashboard');}});
+    var btn = document.getElementById('save-settings-btn');
+    btn.textContent = 'Kaydediliyor...'; btn.disabled = true;
+    var updates = {
+      siteTitle: document.getElementById('st-title').value,
+      heroLayout: document.getElementById('st-layout').value
+    };
+    await store.updateSettings(updates);
+    document.title = updates.siteTitle;
+    showToast('Ayarlar kaydedildi!','success');
+    btn.textContent = '💾 Kaydet'; btn.disabled = false;
   });
 }

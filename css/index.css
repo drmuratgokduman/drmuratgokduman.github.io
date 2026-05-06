@@ -74,7 +74,7 @@ ul,ol{list-style:none}
 .form-input:focus,.form-textarea:focus{background:var(--bg-input-focus);border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,240,255,0.1)}
 .form-input::placeholder,.form-textarea::placeholder{color:var(--text-muted)}
 .form-textarea{resize:vertical;min-height:120px;line-height:1.6}
-
+select.form-input option, .form-select option { background: var(--bg-secondary); color: var(--text-primary); }
 /* Tags */
 .tag{display:inline-flex;align-items:center;padding:0.25rem 0.75rem;background:rgba(0,240,255,0.1);color:var(--accent);border-radius:var(--radius-full);font-size:0.75rem;font-weight:500;border:1px solid rgba(0,240,255,0.15)}
 
