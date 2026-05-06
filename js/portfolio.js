@@ -9,7 +9,7 @@ async function renderPortfolio(container) {
 
   container.innerHTML =
     '<nav class="nav" id="main-nav"><div class="nav-inner">' +
-      '<a class="nav-logo" href="#/">' + escapeHtml(profile.name.split(' ')[0] || 'Portfolyo') + '</a>' +
+      '<a class="nav-logo" href="#/"><img src="assets/My Raven.png" alt="Logo"></a>' +
       '<div class="nav-links" id="nav-links">' +
         '<a href="#hero" data-scroll="hero">Ana Sayfa</a>' +
         '<a href="#about" data-scroll="about">Hakkımda</a>' +
