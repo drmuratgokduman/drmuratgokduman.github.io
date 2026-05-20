@@ -1,0 +1,44 @@
+{
+  "profile": {
+    "name": "Dr. Murat Gökduman",
+    "title": "VR & 3D Geliştirici",
+    "bio": "Sanal gerçeklik ve 3D modelleme üzerine uzmanlaşmış profesyonel geliştirici.",
+    "about": "Sanal dünyalar inşa etmek benim tutkum...",
+    "photo": "img/img_1779302520122_0_739.jpg",
+    "email": "email@example.com",
+    "github": "https://github.com/drmuratgokduman",
+    "linkedin": "",
+    "twitter": ""
+  },
+  "posts": [
+    {
+      "id": "demo-1",
+      "title": "Hoşgeldiniz",
+      "summary": "Bu bir deneme yazısıdır.",
+      "content": "Statik altyapıya geçiş yapıldı.",
+      "date": "2026-05-06",
+      "tags": [
+        "sistem"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj-1",
+      "title": "VR Deneyimi",
+      "description": "Örnek 3D proje.",
+      "technologies": [
+        "Unity",
+        "C#"
+      ],
+      "liveUrl": "",
+      "githubUrl": "",
+      "images": [],
+      "date": "2026-05-01"
+    }
+  ],
+  "settings": {
+    "siteTitle": "Portfolyom",
+    "heroLayout": "split"
+  }
+}
